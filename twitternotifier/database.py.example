@@ -1,0 +1,35 @@
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': '',
+        'USER': '',
+        'HOST': '',
+        'PORT': '',
+        'PASSWORD': '',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        },
+    },
+    'favorites': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': '',
+        'USER': '',
+        'HOST': '',
+        'PORT': '',
+        'PASSWORD': '',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        },
+    },
+    'retweets': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': '',
+        'USER': '',
+        'HOST': '',
+        'PORT': '',
+        'PASSWORD': '',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        },
+    },
+}
