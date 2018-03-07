@@ -1,0 +1,8 @@
+# gitignore for django-twitter-notifier
+
+__pycache__/
+
+db.sqlite3
+
+database.py
+static_settings.py
