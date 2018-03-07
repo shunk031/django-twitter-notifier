@@ -1,4 +1,4 @@
-# Twitter Favorite Notifier
+# Django Twitter Notifier
 
 ## Setup mysql
 
