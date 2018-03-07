@@ -25,12 +25,13 @@ SECRET_KEY = '0votov)&5&0_*qietd6x-0f)0wptv#oqu@y_hpfltg@ot*pq6$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.11.2']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'twitternotifier',
     'favorites.apps.FavoritesConfig',
     'retweets.apps.RetweetsConfig',
     'jet.dashboard',
@@ -77,12 +78,12 @@ WSGI_APPLICATION = 'twitternotifier.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
@@ -122,6 +123,83 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGGING_PREFIX = 'twitter notifier'
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'formatters': {
+        'verbose': {
+            '()': 'colorlog.ColoredFormatter',
+            'format': ('%(log_color)s[%(levelname)s]'
+                       '[in %(pathname)s:%(lineno)d]'
+                       '%(asctime)s %(process)d %(thread)d '
+                       '%(module)s: %(message)s'),
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+            'log_colors': {
+                'DEBUG':    'bold_black',
+                'INFO':     'white',
+                'WARNING':  'yellow',
+                'ERROR':    'red',
+                'CRITICAL': 'bold_red',
+            },
+        },
+        'sql': {
+            '()': 'colorlog.ColoredFormatter',
+            'format': '%(cyan)s[SQL] %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+        'syslog_verbose': {
+            'format': ('{}:[%(levelname)s] [in %(pathname)s:%(lineno)d] '
+                       '%(asctime)s %(process)d %(thread)d '
+                       '%(module)s: %(message)s'.format(LOGGING_PREFIX)),
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+    },
+    'handlers': {
+        # コンソール出力するハンドラ
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        # SQLをコンソール出力するハンドラ
+        'sql': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'sql'
+        },
+        # null出力するハンドラ
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+    },
+    'loggers': {
+        # djangoのログ
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True
+        },
+        # Database Query
+        'django.db.backends': {
+            'handlers': ['sql'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        LOGGING_PREFIX: {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    }
+}
 
 try:
     from .database import DATABASES
