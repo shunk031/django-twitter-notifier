@@ -25,7 +25,7 @@ $ sudo mysql
 - create databases
 
 ``` sql
-> CREATE DATABASE twitternotifier;
+> CREATE DATABASE twitternotifier CHARACTER SET utf8mb4;
 ```
 
 - create tables
@@ -116,11 +116,11 @@ $ python manage.py runserver 0:8000
 ## Get favorites and retweets
 
 ``` shell
-$ python manage.py get_tweets
+$ python manage.py gettweets
 ```
 
 ## Notify to slack
 
 ``` shell
-$ python manage.py notify_slack
+$ python manage.py notifyslack
 ```
