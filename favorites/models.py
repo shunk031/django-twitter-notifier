@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 
+from twitternotifier.api.twitter import twitterapi
+
 # Create your models here.
 
 
@@ -22,6 +24,10 @@ class FavoriteTweet(models.Model):
         return '[@{}] {}...'.format(
             self.user_screen_name,
             self.tweet[:80].replace('\n', ''))
+
+    def delete(self, *args, **kwargs):
+        twitterapi().destroy_favorite(int(self.tweet_id))
+        return super(FavoriteTweet, self).delete(*args, **kwargs)
 
     class Meta:
         managed = False
