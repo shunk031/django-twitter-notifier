@@ -27,8 +27,8 @@ class Command(BaseCommand):
         favorite_tweets = _get_favorites()
         _save_favorites(favorite_tweets)
 
-        # retweet_tweets = _get_retweets()
-        # _save_retweets(retweet_tweets)
+        retweet_tweets = _get_retweets()
+        _save_retweets(retweet_tweets)
 
 
 def _get_favorites():
