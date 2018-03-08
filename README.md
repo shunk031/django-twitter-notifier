@@ -43,6 +43,7 @@ CREATE TABLE `twitter_favorites` (
   `update_at` datetime NOT NULL,
   `favorite_count` integer NOT NULL,
   `retweet_count` integer NOT NULL,
+  `original_url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='twitter favorite table';
   
@@ -57,6 +58,7 @@ CREATE TABLE `twitter_retweets` (
   `update_at` datetime NOT NULL,
   `favorite_count` integer NOT NULL,
   `retweet_count` integer NOT NULL,
+  `original_url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='twitter retweet table';
 ```
@@ -103,6 +105,12 @@ Password (again): (Input password again)
 
 ``` shell
 $ python manage.py runserver 0:8000
+```
+
+## Get favorites and retweets
+
+``` shell
+$ python manage.py get_tweets
 ```
 
 ## Notify to slack
