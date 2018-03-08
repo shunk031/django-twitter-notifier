@@ -69,6 +69,12 @@ CREATE TABLE `twitter_retweets` (
 > GRANT ALL PRIVILEGES ON twitternotifier.* TO 'user1'@'localhost' IDENTIFIED BY 'your password';
 ```
 
+## Install requirements
+
+``` shell
+$ pip install -r requirements.txt
+```
+
 ## Copy some setting files
 
 ``` shell
