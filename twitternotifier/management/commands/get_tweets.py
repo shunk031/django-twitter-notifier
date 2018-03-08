@@ -41,8 +41,8 @@ def _get_favorites():
     while True:
         try:
             if page != 0 and page % GET_FAVORITE_REQUEST_LIMIT == 0:
-                logger.info('[{}] Sleep {} sec.'.format(
-                    sys._getframe().f_code.co_name, MIN_REQUEST * 60))
+                logger.info('[{}] Sleep {} min.'.format(
+                    sys._getframe().f_code.co_name, MIN_REQUEST))
                 time.sleep(MIN_REQUEST * 60)
 
             favs = twitterapi().favorites(
@@ -78,8 +78,8 @@ def _get_retweets():
     while True:
         try:
             if page != 0 and page % GET_RETWEET_REQUEST_LIMIT == 0:
-                logger.info('[{}] Sleep {} sec.'.format(
-                    sys._getframe().f_code.co_name, MIN_REQUEST * 60))
+                logger.info('[{}] Sleep {} min.'.format(
+                    sys._getframe().f_code.co_name, MIN_REQUEST))
                 time.sleep(MIN_REQUEST * 60)
 
             rets = twitterapi().retweets_of_me(
@@ -126,7 +126,7 @@ def _save_favorites(favorite_tweets):
                 tweet_id=tweet.tweet_id)
             saved_tweet.save()
 
-    logger.info('[{}] {} new tweet saved.'.format(
+    logger.info('[{}] {} new tweets saved.'.format(
         sys._getframe().f_code.co_name, new_one))
 
 
@@ -152,5 +152,5 @@ def _save_retweets(retweet_tweets):
                 tweet_id=tweet.tweet_id)
             saved_tweet.save()
 
-    logger.info('[{}] {} new tweet saved.'.format(
+    logger.info('[{}] {} new tweets saved.'.format(
         sys._getframe().f_code.co_name, new_one))
