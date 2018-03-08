@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '0votov)&5&0_*qietd6x-0f)0wptv#oqu@y_hpfltg@ot*pq6$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['192.168.11.2']
 
@@ -137,9 +137,8 @@ LOGGING = {
         'verbose': {
             '()': 'colorlog.ColoredFormatter',
             'format': ('%(log_color)s[%(levelname)s]'
-                       '[in %(pathname)s:%(lineno)d]'
-                       '%(asctime)s %(process)d %(thread)d '
-                       '%(module)s: %(message)s'),
+                       '[in %(module)s:%(lineno)d] '
+                       '%(asctime)s %(message)s'),
             'datefmt': '%Y-%m-%d %H:%M:%S',
             'log_colors': {
                 'DEBUG':    'bold_black',
@@ -149,11 +148,11 @@ LOGGING = {
                 'CRITICAL': 'bold_red',
             },
         },
-        'sql': {
-            '()': 'colorlog.ColoredFormatter',
-            'format': '%(cyan)s[SQL] %(message)s',
-            'datefmt': '%Y-%m-%d %H:%M:%S',
-        },
+        # 'sql': {
+        #     '()': 'colorlog.ColoredFormatter',
+        #     'format': '%(cyan)s[SQL] %(message)s',
+        #     'datefmt': '%Y-%m-%d %H:%M:%S',
+        # },
         'syslog_verbose': {
             'format': ('{}:[%(levelname)s] [in %(pathname)s:%(lineno)d] '
                        '%(asctime)s %(process)d %(thread)d '
@@ -169,11 +168,11 @@ LOGGING = {
             'formatter': 'verbose',
         },
         # SQLをコンソール出力するハンドラ
-        'sql': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'sql'
-        },
+        # 'sql': {
+        #     'level': 'DEBUG',
+        #     'class': 'logging.StreamHandler',
+        #     'formatter': 'sql'
+        # },
         # null出力するハンドラ
         'null': {
             'level': 'DEBUG',
@@ -187,12 +186,12 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True
         },
-        # Database Query
-        'django.db.backends': {
-            'handlers': ['sql'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
+        # # Database Query
+        # 'django.db.backends': {
+        #     'handlers': ['sql'],
+        #     'level': 'DEBUG',
+        #     'propagate': False,
+        # },
         LOGGING_PREFIX: {
             'handlers': ['console'],
             'level': 'DEBUG',
