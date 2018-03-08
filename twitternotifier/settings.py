@@ -25,17 +25,20 @@ SECRET_KEY = '0votov)&5&0_*qietd6x-0f)0wptv#oqu@y_hpfltg@ot*pq6$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.11.2']
+ALLOWED_HOSTS = [
+    'localhost',
+    '192.168.11.2'
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'jet.dashboard',
+    'jet',
     'twitternotifier',
     'favorites.apps.FavoritesConfig',
     'retweets.apps.RetweetsConfig',
-    'jet.dashboard',
-    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
