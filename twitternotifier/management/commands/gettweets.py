@@ -54,7 +54,6 @@ def _get_favorites():
 
             favorites.extend(favs)
             time.sleep(2)
-
             page += 1
 
         except Exception as err:
