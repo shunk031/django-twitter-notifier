@@ -6,3 +6,6 @@ db.sqlite3
 
 database.py
 static_settings.py
+
+gettweets.log
+notifyslack.log
