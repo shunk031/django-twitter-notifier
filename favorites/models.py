@@ -1,9 +1,12 @@
+import sys
+
 from django.db import models
 from django.utils import timezone
 
 from twitternotifier.api.twitter import twitterapi
+from twitternotifier.logging import get_logger
 
-# Create your models here.
+logger = get_logger(__name__)
 
 
 class FavoriteTweet(models.Model):
@@ -14,7 +17,7 @@ class FavoriteTweet(models.Model):
     user_id = models.CharField(max_length=255)
     user_name = models.CharField(max_length=255)
     user_screen_name = models.CharField(max_length=255)
-    update_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(default=timezone.now)
     favorite_count = models.IntegerField(default=0)
     retweet_count = models.IntegerField(default=0)
@@ -26,7 +29,12 @@ class FavoriteTweet(models.Model):
             self.tweet[:80].replace('\n', ''))
 
     def delete(self, *args, **kwargs):
-        twitterapi().destroy_favorite(int(self.tweet_id))
+        try:
+            twitterapi().destroy_favorite(int(self.tweet_id))
+        except Exception as err:
+            logger.exception('[{}] {}'.format(
+                sys._getframe().f_code.co_name, err))
+
         return super(FavoriteTweet, self).delete(*args, **kwargs)
 
     class Meta:

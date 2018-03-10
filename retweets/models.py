@@ -11,7 +11,7 @@ class RetweetTweet(models.Model):
     user_id = models.CharField(max_length=255)
     user_name = models.CharField(max_length=255)
     user_screen_name = models.CharField(max_length=255)
-    update_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(default=timezone.now)
     favorite_count = models.IntegerField(default=0)
     retweet_count = models.IntegerField(default=0)
